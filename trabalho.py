@@ -59,7 +59,7 @@ class AgendaPartidas:
         if not atual:
             print("Nenhuma partida registrada.")
             return
-        print("Agenda de partidas (ordem cronológica):")
+        print("Agenda de partidas:")
         while atual:
             print(f"- vs {atual.adversario} em {atual.data} | Resultado: {atual.resultado or 'a definir'}")
             atual = atual.proximo
