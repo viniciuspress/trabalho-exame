@@ -64,6 +64,16 @@ class AgendaPartidas:
             print(f"- vs {atual.adversario} em {atual.data} | Resultado: {atual.resultado or 'a definir'}")
             atual = atual.proximo
 
+    def exibir_partidas_reverso(self):
+        atual = self.fim
+        if not atual:
+            print("Nenhuma partida registrada.")
+            return
+        print("Agenda de partidas (mais recente para mais antiga):")
+        while atual:
+            print(f"- vs {atual.adversario} em {atual.data} | Resultado: {atual.resultado or 'a definir'}")
+            atual = atual.anterior
+
 class Jogador:
     def __init__(self, nome_jogador, idade_jogador, posicao_jogador):
         self.nome_jogador = nome_jogador
@@ -190,6 +200,13 @@ def exibir_agenda_clube_ordem():
         return
     clubes[nome_clube].agenda.exibir_partidas_ordem()
 
+def exibir_agenda_clube_reversa():
+    nome_clube = input("Nome do clube: ")
+    if nome_clube not in clubes:
+        print("Clube não encontrado.")
+        return
+    clubes[nome_clube].agenda.exibir_partidas_reverso()
+
 def menu():
     while True:
         print("\n=== MENU ===")
@@ -203,6 +220,7 @@ def menu():
         print("8. Mostrar lesões")
         print("9. Adicionar partida à agenda do clube")
         print("10. Exibir agenda")
+        print("11. Exibir agenda em ordem reversa")
         print("0. Sair")
         opcao = input("Escolha: ")
         if opcao == "1":
@@ -225,6 +243,8 @@ def menu():
             adicionar_partida_clube()
         elif opcao == "10":
             exibir_agenda_clube_ordem()
+        elif opcao == "11":
+            exibir_agenda_clube_reversa()
         elif opcao == "0":
             break
         else:
